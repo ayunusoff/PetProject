@@ -1,4 +1,5 @@
 <template>
+  <PageHeader/>
   <ProductListElement/>
   <WeatherForecast/>
 </template>
@@ -6,10 +7,11 @@
 <script>
 import ProductListElement from './components/ProductListElement.vue';
 import WeatherForecast from './components/WeatherForecast.vue'
-
+import PageHeader from './components/PageHeader.vue'
 export default {
   name: 'App',
   components: {
+    PageHeader,
     WeatherForecast,
     ProductListElement
 }
