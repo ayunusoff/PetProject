@@ -1,13 +1,10 @@
-using Microsoft.AspNetCore.SpaServices;
 using VueCliMiddleware;
-using Microsoft.Extensions.DependencyInjection;
-using PetProject.DBContext;
+using PetProject.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("PetDB");
-builder.Services.AddDbContext<PetProjectContext>(options =>
-    options.UseNpgsql(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("DB");
+builder.Services.AddDbContext<PetProjectContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddControllers();
 builder.Services.AddSpaStaticFiles(configuration => configuration.RootPath = "clientapp/dist");
 builder.Services.AddEndpointsApiExplorer();
