@@ -36,12 +36,15 @@ namespace PetProject.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<string>("ImgSrc")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("PetProject.Models.WeatherForecast", b =>
@@ -55,7 +58,7 @@ namespace PetProject.Migrations
                     b.Property<int>("TemperatureC")
                         .HasColumnType("integer");
 
-                    b.ToTable("WeatherForecasts");
+                    b.ToTable("WeatherForecasts", (string)null);
                 });
 #pragma warning restore 612, 618
         }

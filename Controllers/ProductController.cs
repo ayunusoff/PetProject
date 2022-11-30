@@ -19,7 +19,7 @@ namespace PetProject.Controllers
         [HttpGet]
         public IActionResult Get() 
         {
-            var product = _context.Products?.Select(p => new {p.Name, p.Description, p.Cost}).ToList();
+            var product = _context.Products?.ToList();
             return Json(product);
         } 
         [HttpPost]

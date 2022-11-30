@@ -33,6 +33,9 @@ namespace PetProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ImgSrc")
+                        .HasColumnType("text");
+
                     b.Property<decimal>("Cost")
                         .HasColumnType("numeric");
 

@@ -18,6 +18,7 @@ namespace PetProject.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ImgSrc = table.Column<string>(type: "text", nullable: true), 
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Cost = table.Column<decimal>(type: "numeric", nullable: false)
