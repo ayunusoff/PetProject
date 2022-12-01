@@ -3,7 +3,7 @@ using PetProject.Interfaces;
 
 namespace PetProject.Data
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         DbContext _context;
         DbSet<TEntity> _dbSet;
@@ -25,7 +25,10 @@ namespace PetProject.Data
         }
         public async Task<TEntity> GetById(int id)
         {
-            return await _dbSet.FindAsync(id);
+            var result = await _dbSet.FindAsync(id);
+            if (result != null)
+                return result;
+            return null;
         }
  
         public async Task Create(TEntity item)

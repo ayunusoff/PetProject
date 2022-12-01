@@ -1,40 +1,56 @@
-using Microsoft.EntityFrameworkCore;
-using PetProject.Data;
+
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using PetProject.Models;
+using PetProject.Entities;
+using Microsoft.EntityFrameworkCore;
+using PetProject.Data;
 
 namespace PetProject.Controllers
 {
     
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class ProductController : InitController
+    public class ProductController : InitController<Product>
     {
-        private GenericRepository<Product> _rep;
-        private PetProjectContext _context;
-        
-        public ProductController(PetProjectContext context, GenericRepository<Product> _rep) : base(context, _rep)
+        public ProductController(PetProjectContext context, GenericRepository<Product> rep) : base(context, rep) { }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromHeader] int id) 
         {
+            var product = await _rep.GetById(id);
+            if (product != null)
+                return Json(product);
+            return NotFound();
         }
-        [HttpGet]
-        public IActionResult GetById([FromHeader] int Id) 
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] Product product) 
         {
-            var product = getById(Id);
-            return 0;
+            if (product != null) 
+            {
+                await _rep.Update(product);
+                return Ok();
+            }
+            return BadRequest();
         }
-        [HttpGet]
-        public IActionResult Get() 
-        {
-            var product = _context.Products?.ToList();
-            return Json(product);
-        } 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Product product)
         {
-            await _context.AddAsync(product);
-            await _context.SaveChangesAsync();
-            return Ok();
+            if (product != null)
+            {
+                await _rep.Create(product);
+                return Ok();
+            }
+            return BadRequest();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromHeader] int id) 
+        {
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.ProductId == id);
+            if (product != null) 
+            {
+                await _rep.Remove(product);
+                return Ok();
+            }
+            return NotFound();
         }
     }
 }

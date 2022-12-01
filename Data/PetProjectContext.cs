@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PetProject.Models;
+using PetProject.Entities;
 
 namespace PetProject.Data
 {

@@ -48,11 +48,6 @@ export default {
   },
   methods: {
     
-    listSort() {
-      //switch (this.sortMethod) {
-        //return 
-      }
-    
   },
   mounted () {
     axios.get("/api/Product/Get")

@@ -1,21 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using PetProject.Data;
 using PetProject.Interfaces;
-using PetProject.Models;
+using PetProject.Entities;
 
 namespace PetProject.Data
 {
     [ApiController]
-    public class InitController : Controller
+    public class InitController<TEntity> : Controller where TEntity : class
     {
-        protected GenericRepository<IEntity> _service;
+        protected GenericRepository<TEntity> _rep;
         protected PetProjectContext _context;
-        private PetProjectContext context;
-        private GenericRepository<Product> rep;
-
-        public InitController(PetProjectContext context, GenericRepository<IEntity> service) 
+        public InitController(PetProjectContext context, GenericRepository<TEntity> rep) 
         {
-            _service = service;
+            _rep = rep;
             _context = context;
         }
     }
