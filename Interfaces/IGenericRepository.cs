@@ -1,12 +1,18 @@
+using System.Linq.Expressions;
+
 namespace PetProject.Interfaces
 {
-    public interface IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        Task Create(TEntity item);
-        Task<TEntity> GetById(int id);
-        IEnumerable<TEntity> Get();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
-        Task Remove(TEntity item);
-        Task Update(TEntity item);
+       Task<TEntity> Get(string id);
+       Task<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+       Task<IEnumerable<TEntity>> GetAll();
+       Task<IEnumerable<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate);
+       Task Add(TEntity entity);
+       Task AddRange(IEnumerable<TEntity> entities);
+       void Update(TEntity entity);
+       void UpdateRange(IEnumerable<TEntity> entities);
+       void Delete(TEntity entity);
+       void DeleteRange(IEnumerable<TEntity> entities);
     }
 }

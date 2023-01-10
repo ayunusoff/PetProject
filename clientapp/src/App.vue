@@ -1,27 +1,21 @@
 <template>
-  <PageHeader/>
-  <ProductListElement/>
+  <v-app>
+    <v-app-bar
+      app
+      color="red"
+    >
+    <v-app-bar-title>
+      <h3 class="text-h4 white--text">PetProject</h3>
+    </v-app-bar-title>
+    <router-link to="/" class="navbar-brand">bezKoder</router-link>
+    <router-link to="/article" class="nav-link">Tutorials</router-link>
+    <router-link to="/add" class="nav-link">Add</router-link>
+    </v-app-bar>
+  </v-app>
 </template>
 
 <script>
-import ProductListElement from './components/ProductListElement.vue';
-import PageHeader from './components/PageHeader.vue'
 export default {
   name: 'App',
-  components: {
-    PageHeader,
-    ProductListElement
-}
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -117,3 +117,10 @@ C:\Users\Warrior\Desktop\gitProj\PetProject\obj\Debug\net6.0\scopedcss\bundle\Pe
 C:\Users\Warrior\Desktop\gitProj\PetProject\obj\Debug\net6.0\PetProject.csproj.CopyComplete
 C:\Users\Warrior\Desktop\gitProj\PetProject\obj\Debug\net6.0\PetProject.genruntimeconfig.cache
 C:\Users\Warrior\Desktop\gitProj\PetProject\obj\Debug\net6.0\ref\PetProject.dll
+C:\PetProject\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\PetProject\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\PetProject\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\PetProject\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\PetProject\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\PetProject\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\PetProject\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

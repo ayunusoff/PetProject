@@ -1,7 +1,15 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap/dist/js/bootstrap.min.js"
-import "bootstrap"
+import vuetify from './plugins/vuetify'
+import { loadFonts } from './plugins/webfontloader'
+import router from './router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-createApp(App).mount('#app')
+loadFonts()
+
+createApp(App)
+    .use(VueAxios, axios)
+    .use(vuetify)
+    .use(router)
+    .mount('#app')

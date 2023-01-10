@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IIS" Version="2.2.6" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
@@ -18,7 +19,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="System.Data.Entity.Repository" Version="2.0.0.1" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="VueCliMiddleware" Version="6.0.0" />
   </ItemGroup>

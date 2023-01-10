@@ -1,7 +1,7 @@
 namespace PetProject.Interfaces
 {
-    public interface IEntity<T>
+    public interface IEntity
     {
-        public T Id { get; set; }
+        public Guid Id { get; set; }
     }
 }
