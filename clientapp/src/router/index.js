@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from "vue-router";
+/*import { createWebHistory, createRouter } from "vue-router";
 
 const routes =  [
   {
@@ -24,4 +24,22 @@ const router = createRouter({
     routes,
   });
   
+export default router;*/
+import { createWebHistory, createRouter } from "vue-router";
+import ArticleList from '@/components/ArticleList'
+
+const routes = [
+    {
+        path: "/",
+        alias: "/article",
+        name: "article-list",
+        component: ArticleList
+    }
+];
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
 export default router;

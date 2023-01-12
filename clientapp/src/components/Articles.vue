@@ -11,7 +11,7 @@
           <div class="form-group">
             <label for="text">Description</label>
             <input type="text" class="form-control" id="description"
-              v-model="currentArticle.description"
+              v-model="currentArticle.text"
             />
           </div>
     
@@ -68,8 +68,8 @@ export default {
     getTutorial(id) {
       ArticlesDataService.get(id)
         .then(response => {
-          this.currentTutorial = response.data;
-          console.log(response.data);
+        this.currentArticle = response.data;
+        console.log(response.data);
         })
         .catch(e => {
           console.log(e);
@@ -78,17 +78,17 @@ export default {
 
     updatePublished(status) {
       var data = {
-        id: this.currentTutorial.id,
-        title: this.currentTutorial.title,
-        description: this.currentTutorial.description,
+         id: this.currentArticle.id,
+        title: this.currentArticle.title,
+        text: this.currentArticle.description,
         published: status
       };
 
       ArticlesDataService.update(this.currentTutorial.id, data)
-        .then(response => {
-          console.log(response.data);
-          this.currentTutorial.published = status;
-          this.message = 'The status was updated successfully!';
+            .then(response => {
+            console.log(response.data);
+            this.currentArticle.published = status;
+            this.message = 'The status was updated successfully!';
         })
         .catch(e => {
           console.log(e);
@@ -96,7 +96,7 @@ export default {
     },
 
     updateTutorial() {
-      ArticlesDataService.update(this.currentTutorial.id, this.currentTutorial)
+        ArticlesDataService.update(this.currentArticle.id, this.currentArticle)
         .then(response => {
           console.log(response.data);
           this.message = 'The tutorial was updated successfully!';
@@ -107,10 +107,10 @@ export default {
     },
 
     deleteTutorial() {
-      ArticlesDataService.delete(this.currentTutorial.id)
-        .then(response => {
-          console.log(response.data);
-          this.$router.push({ name: "tutorials" });
+        ArticlesDataService.delete(this.currentArticle.id)
+            .then(response => {
+            console.log(response.data);
+            this.$router.push({ name: "currentArticle" });
         })
         .catch(e => {
           console.log(e);

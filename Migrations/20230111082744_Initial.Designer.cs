@@ -12,8 +12,8 @@ using PetProject.Data;
 namespace PetProject.Migrations
 {
     [DbContext(typeof(PetProjectContext))]
-    [Migration("20230101163706_initial_migrations")]
-    partial class initialmigrations
+    [Migration("20230111082744_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
