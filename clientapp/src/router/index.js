@@ -27,6 +27,7 @@ const router = createRouter({
 export default router;*/
 import { createWebHistory, createRouter } from "vue-router";
 import ArticleList from '@/components/ArticleList'
+import ArticleDetail from '@/components/ArticleDetail'
 
 const routes = [
     {
@@ -34,6 +35,11 @@ const routes = [
         alias: "/article",
         name: "article-list",
         component: ArticleList
+    },
+    {
+        path: "/article/:id",
+        name: "article-detail",
+        component: ArticleDetail
     }
 ];
 

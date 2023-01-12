@@ -26,8 +26,7 @@ namespace PetProject.Controllers
             return NotFound();
         }
         
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromHeader] string id) 
         {
             var article = await _uof.ArticleRepository.Get(id);
@@ -45,8 +44,8 @@ namespace PetProject.Controllers
             if (article != null) 
             {
                 article.Title = articleRequest.Title != null ? articleRequest.Title : article.Title;
-                article.Text = articleRequest.Text  != null ? articleRequest.Text : article.Text;
-                article.PreviewImgSrc = articleRequest.PreviewImgSrc  != null ? articleRequest.PreviewImgSrc : article.PreviewImgSrc;
+                article.Text = articleRequest.Text != null ? articleRequest.Text : article.Text;
+                article.PreviewImgSrc = articleRequest.PreviewImgSrc != null ? articleRequest.PreviewImgSrc : article.PreviewImgSrc;
                 await _uof.Complete();
                 return Ok();
             }
@@ -56,7 +55,7 @@ namespace PetProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Article article) 
         {
-            if (article != null) 
+            if (article != null)
             {
                 await _uof.ArticleRepository.Add(article);
                 await _uof.Complete();
