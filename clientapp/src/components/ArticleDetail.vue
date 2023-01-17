@@ -22,7 +22,6 @@
 
     export default {
 
-        props: ["idElement"],
         name: "article-detail",
 
         data: () => ({
@@ -30,7 +29,7 @@
         }),
         methods: {
             getArticles() {
-                ArticlesDataService.get(props.idElement)
+                ArticlesDataService.get()
                 .then(response => {
                     this.Article = response.data;
                 console.log(response.data);

@@ -17,10 +17,10 @@
                            :src="item.previewImgSrc"></v-img> <!-- С помощью v-img добавляем изображение карточки -->
 
                     <v-card-title>
-                        <router-link :to="{ path: 'article', query: { plan: 'private' }}, name: 'article-detail', params: { idElement: item.id }" class="dropdown-item">
-                            <!-- Заголовок заведения -->
-                            <h3 class="text-h4">{{ item.title }}</h3>
-                        </router-link>
+                        <!--<router-link :to="{ path: 'article',name: 'article-detail'}" class="dropdown-item">-->
+                        <!-- Заголовок заведения -->
+                        <h3 class="text-h4">{{ item.title }}</h3>
+                       
                     </v-card-title>
 
                     <v-card-text>

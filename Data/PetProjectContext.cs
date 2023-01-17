@@ -31,7 +31,15 @@ namespace PetProject.Data
                     Text = "Test2 Test2Test2 Test2 Test21Tes2t21T2e22st1 Test1", 
                     PreviewImgSrc = "https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ",
                     DateAdd = DateTime.UtcNow 
-                } 
+                },
+                new Article()
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Test3",
+                    Text = "Test3 Test3Test3 Test3 Test321Tes32t213T2e223st1 Te3st1",
+                    PreviewImgSrc = "https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ",
+                    DateAdd = DateTime.UtcNow
+                },
             });
         }
         public DbSet<Article> Articles { get; set; }

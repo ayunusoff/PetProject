@@ -16,6 +16,6 @@ namespace PetProject.Entities
         public string? PreviewImgSrc { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DateAdd { get; set; } = DateTime.Now;
+        public DateTime DateAdd { get; set; } = DateTime.UtcNow;
     }
 }

@@ -53,11 +53,20 @@ namespace PetProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Article article) 
+        public async Task<IActionResult> Post([FromBody] ArticleRequest article) 
         {
             if (article != null)
             {
-                await _uof.ArticleRepository.Add(article);
+                await _uof.ArticleRepository.Add(
+                new Article 
+                {
+                    Id = article.Id == null ? Guid.NewGuid() : (Guid)article.Id,
+                    Title = article.Title,
+                    Text = article.Text,
+                    PreviewImgSrc = article.PreviewImgSrc != null ? article.PreviewImgSrc : "./public/favicon.ico",
+                    DateAdd = DateTime.UtcNow,
+                }
+                );
                 await _uof.Complete();
                 return Ok();
             }
@@ -65,9 +74,9 @@ namespace PetProject.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromHeader] string id) 
+        public async Task<IActionResult> Delete([FromHeader] Guid id) 
         {
-            var article = await _uof.ArticleRepository.Get(id);
+            var article = await _uof.ArticleRepository.Get(id.ToString());
             if (article != null)
             {
                 _uof.ArticleRepository.Delete(article);

@@ -1,49 +1,40 @@
 <template>
-    <div class="submit-form">
-      <div v-if="!submitted">
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            required
-            v-model="article.title"
-            name="title"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="Text">Text</label>
-          <input
-            class="form-control"
-            id="description"
-            required
-            v-model="article.text"
-            name="text"
-          />
-        </div>
-        
-        <div class="form-group">
-            <label for="previewImgSrc">imgSrc</label>
-            <input
-              class="form-control"
-              id="description"
-              required
-              v-model="article.previewImgSrc"
-              name="previewImgSrc"
-            />
-        </div>
-          
-        <button @click="saveArticle" class="btn btn-success">Submit</button>
-      </div>
-  
-      <div v-else>
-        <h4>You submitted successfully!</h4>
-        <button class="btn btn-success" @click="newArticle">Add</button>
-      </div>
-    </div>
-  </template>
+    <v-form v-model="valid">
+        <v-container>
+            <v-row>
+                <v-col cols="12"
+                       md="4">
+                    <v-text-field v-model="article.title"
+                                  :rules="nameRules"
+                                  :counter="20"
+                                  label="title"
+                                  required></v-text-field>
+                </v-col>
+
+                <v-col cols="12"
+                       md="4">
+                    <v-text-field v-model="article.text"
+                                  :rules="nameRules"
+                                  :counter="500"
+                                  label="text"
+                                  required></v-text-field>
+                </v-col>
+
+                <v-col cols="12"
+                       md="4">
+                    <v-text-field v-model="article.previewImgSrc"
+                                  :rules="emailRules"
+                                  label="previewImgSrc"
+                                  required></v-text-field>
+                </v-col>
+            </v-row>
+        </v-container>
+        <v-btn type="submit" class="mr-4"
+               @click="submit">
+            submit
+        </v-btn>
+    </v-form>
+</template>
   
   <script>
   import ArticlesDataService from "../services/ArticlesDataService";
@@ -63,8 +54,9 @@
     methods: {
       saveArticle() {
         var data = {
-          title: this.article.title,
-          description: this.article.text
+            title: this.article.title,
+            description: this.article.text,
+            previewImgSrc: this.article.previewImgSrc
         };
   
         ArticlesDataService.create(data)
