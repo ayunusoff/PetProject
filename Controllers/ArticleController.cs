@@ -27,7 +27,7 @@ namespace PetProject.Controllers
         }
         
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromHeader] string id) 
+        public async Task<IActionResult> Get(string id) 
         {
             var article = await _uof.ArticleRepository.Get(id);
             if (article != null) 
@@ -74,12 +74,13 @@ namespace PetProject.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromHeader] Guid id) 
+        public async Task<IActionResult> Delete(string id) 
         {
             var article = await _uof.ArticleRepository.Get(id.ToString());
             if (article != null)
             {
                 _uof.ArticleRepository.Delete(article);
+                _uof.Complete();
                 return Ok();
             }
             return BadRequest();

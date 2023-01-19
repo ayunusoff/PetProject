@@ -10,22 +10,22 @@
         </v-row>
 
         <v-row class="list__cafes-content">
-            <v-col md="10" v-for="item in Articles" :key="item.id">
+            <v-col md="6" v-for="item in Articles" :key="item.id">
                 <v-card>
-
-                    <v-img height="500"
-                           :src="item.previewImgSrc"></v-img> <!-- С помощью v-img добавляем изображение карточки -->
-
-                    <v-card-title>
-                        <!--<router-link :to="{ path: 'article',name: 'article-detail'}" class="dropdown-item">-->
-                        <!-- Заголовок заведения -->
-                        <h3 class="text-h4">{{ item.title }}</h3>
+                    <router-link :to="{ path: '/article/'+ item.id}">
+                        <v-img height="500"
+                               :src="item.previewImgSrc"></v-img> <!-- С помощью v-img добавляем изображение карточки -->
+                    </router-link>
+                        <v-card-title>
+                            <!--<router-link :to="{ path: 'article',name: 'article-detail'}" class="dropdown-item">-->
+                            <!-- Заголовок заведения -->
+                            <h3 class="text-h6">{{ item.title }}</h3>
                        
-                    </v-card-title>
-
-                    <v-card-text>
+                        </v-card-title>
+                    
+                    <v-card-text width="1000">
                         <!-- Описание заведения -->
-                        <p class="text-body-1">{{ item.text }}</p>
+                        <p class="text-body-1" v-html="item.text"></p>
                     </v-card-text>
 
                 </v-card>
@@ -64,3 +64,12 @@
         }
     }
 </script>
+<style>
+    .text-body-1, .text-h6 {
+        background: #f4eddf; /* Цвет фона */
+        padding: 10px; /* Поля вокруг текста */
+        white-space: nowrap; /* Текст не переносится */
+        overflow: hidden; /* Обрезаем всё за пределами блока */
+        text-overflow: ellipsis;
+    }
+</style>

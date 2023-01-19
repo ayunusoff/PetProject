@@ -4,9 +4,26 @@
         <v-app-bar-title>
             <h3 class="text-h4 white--text">PetProject</h3>
         </v-app-bar-title>
-        <router-link to="/#" class="navbar-brand">bezKoder</router-link>
-        <router-link to="/article" class="nav-link">article</router-link>
-        <router-link to="/article/post" class="nav-link">Add</router-link>
+        <router-link to="/#" class="nav-link">
+            <v-btn>
+                Home
+            </v-btn>
+        </router-link>
+        <router-link to="/article" class="nav-link">
+            <v-btn>
+                articles
+            </v-btn>
+        </router-link>
+        <router-link to="/article/post" class="nav-link">
+            <v-btn>
+                Add article
+            </v-btn>
+        </router-link>
+        <router-link to="" class="nav-link">
+            <v-btn>
+                Sign in
+            </v-btn>
+        </router-link>
     </v-app-bar>
 </template>
 <script>
@@ -14,3 +31,9 @@
         name: 'main-header',
     }
 </script>
+<style>
+    .nav-link {
+        color: burlywood;
+        text-decoration: none;
+    }
+</style>

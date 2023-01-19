@@ -15,10 +15,10 @@ namespace PetProject.Data
             _dbSet = context.Set<TEntity>();
         }
         
-        public async Task<TEntity> Get(string id)
-            => await _dbSet.AsNoTracking().FirstAsync(e => e.Id.ToString() == id);
-        public async Task<TEntity> Find(Expression<Func<TEntity, bool>> predicate) 
-            => await _dbSet.AsNoTracking().FirstAsync(predicate);
+        public async Task<TEntity?> Get(string id)
+            => await _dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id.ToString() == id);
+        public async Task<TEntity?> Find(Expression<Func<TEntity, bool>> predicate) 
+            => await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicate);
         public async Task<IEnumerable<TEntity>> GetAll()
             => await _dbSet.AsNoTracking().ToListAsync();
         public async Task<IEnumerable<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate)

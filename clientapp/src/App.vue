@@ -5,9 +5,6 @@
             <router-view></router-view>    
         </v-main>
     </v-app>
-    <button class="badge badge-danger mr-2">
-        Delete
-    </button>
 </template>
 
 <script>

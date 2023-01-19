@@ -21,7 +21,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
-
+app.UseCors(builder => builder.AllowAnyOrigin());
 app.UseHttpsRedirection();
 
 app.UseRouting();

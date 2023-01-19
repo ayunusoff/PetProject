@@ -8,8 +8,6 @@ namespace PetProject.Data
     {
         public PetProjectContext (DbContextOptions<PetProjectContext> options) : base (options) 
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated(); 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {

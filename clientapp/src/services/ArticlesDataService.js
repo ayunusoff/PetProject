@@ -10,7 +10,14 @@ class ArticlesDataService {
   }
 
   create(data) {
-    return http.post("/article/post", data);
+      return http.post("/article/post", data, {
+          headers: {
+              // 'application/json' is the modern content-type for JSON, but some
+              // older servers may use 'text/json'.
+              // See: http://bit.ly/text-json
+              'content-type': 'text/json'
+          }
+      });
   }
 
   update(data) {
