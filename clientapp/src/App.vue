@@ -16,3 +16,8 @@
         }
     }
 </script>
+<style>
+    .v-main {
+        background-color: #FAEBD7;
+    }
+</style>

@@ -19,7 +19,7 @@
                 Add article
             </v-btn>
         </router-link>
-        <router-link to="" class="nav-link">
+        <router-link to="/account/reg" class="nav-link">
             <v-btn>
                 Sign in
             </v-btn>

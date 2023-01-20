@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import ArticleList from '@/components/ArticleList'
 import ArticleDetail from '@/components/ArticleDetail'
 import ArticlePost from '@/components/ArticlePost'
+import Register from '@/components/Register'
 
 const routes = [
     {
@@ -19,6 +20,11 @@ const routes = [
         path: "/article/post",
         name: "article-post",
         component: ArticlePost
+    },
+    {
+        path: "/account/reg",
+        name: "account-reg",
+        component: Register
     },
 ];
 
