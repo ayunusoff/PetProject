@@ -3,6 +3,7 @@ using PetProject.Interfaces;
 using PetProject.Entities;
 using PetProject.Models;
 using PetProject.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PetProject.Controllers
 {
@@ -12,7 +13,7 @@ namespace PetProject.Controllers
     {
         public ArticleController(PetProjectContext context, IUnitOfWork uof) :  base(context, uof)
         {
-
+            
         }
 
         [HttpGet]
@@ -27,20 +28,20 @@ namespace PetProject.Controllers
         }
         
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) 
+        public IActionResult Get(string id) 
         {
-            var article = await _uof.ArticleRepository.Get(id);
+            var article = _uof.ArticleRepository.Get(id);
             if (article != null) 
             {
                 return Json(article);
             }
             return NotFound();
         }
-
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Put([FromBody] ArticleRequest articleRequest) 
         {
-            var article = await _uof.ArticleRepository.Get(articleRequest.Id.ToString());
+            var article = _uof.ArticleRepository.Get(articleRequest.Id.ToString());
             if (article != null) 
             {
                 article.Title = articleRequest.Title != null ? articleRequest.Title : article.Title;
@@ -53,6 +54,7 @@ namespace PetProject.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] ArticleRequest article) 
         {
             if (article != null)
@@ -74,13 +76,14 @@ namespace PetProject.Controllers
         }
         
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(string id) 
         {
-            var article = await _uof.ArticleRepository.Get(id.ToString());
+            var article = _uof.ArticleRepository.Get(id.ToString());
             if (article != null)
             {
                 _uof.ArticleRepository.Delete(article);
-                _uof.Complete();
+                await _uof.Complete();
                 return Ok();
             }
             return BadRequest();

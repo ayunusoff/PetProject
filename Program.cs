@@ -2,12 +2,27 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using PetProject.Interfaces;
-using PetProject.Entities;
+using PetProject.Helpers;
 using VueCliMiddleware;
 using PetProject.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DB");
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters 
+        {
+            ValidateIssuer = true,
+            ValidIssuer = AuthSettings.ISSUER,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            IssuerSigningKey = AuthSettings.GetSymmetricSecurityKey(),
+            ValidateIssuerSigningKey = true,
+        };
+    });
 
 builder.Services.AddDbContext<PetProjectContext>(options => options.UseNpgsql(connectionString));
 
@@ -35,6 +50,7 @@ app.UseEndpoints(endpoints =>
     });
 
 app.UseSpaStaticFiles();
+app.UseCors();
 
 app.UseSpa(spa => 
     {

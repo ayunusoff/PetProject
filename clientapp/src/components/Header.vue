@@ -19,16 +19,28 @@
                 Add article
             </v-btn>
         </router-link>
-        <router-link to="/account/reg" class="nav-link">
+        <router-link to="/account/login" class="nav-link">
             <v-btn>
-                Sign in
+                Sign in {{ JSON.parse(user).nickname }}
             </v-btn>
         </router-link>
     </v-app-bar>
 </template>
 <script>
+    import {useAuthStore} from '../stores/user.js'
+    import {storeToRefs} from 'pinia'
+
     export default {
         name: 'main-header',
+        setup() {
+            let userStore = useAuthStore();
+            let {user, token} = storeToRefs(userStore)
+            return {
+                userStore, 
+                user, 
+                token
+            }
+        }
     }
 </script>
 <style>

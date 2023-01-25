@@ -216,14 +216,6 @@
   
   <script>
       import axios from 'axios';
-      /*/<v-col cols="12"
-      md = "4" >
-          <v-text-field
-              v-model="form.text"
-              label="Text"
-              required>
-          </v-text-field>
-                </v - col >*/
       export default {
           name: 'article-post',
           data() {

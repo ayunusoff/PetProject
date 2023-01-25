@@ -17,7 +17,7 @@ namespace PetProject.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromHeader] string id) 
         {
-            var user = await _uof.UserRepository.Get(id);
+            var user = _uof.UserRepository.Get(id);
             if (user != null) 
             {
                 return Json(user);
@@ -36,7 +36,7 @@ namespace PetProject.Controllers
             }
             return BadRequest();
         }
-
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] User user) 
         {
             if (user != null)

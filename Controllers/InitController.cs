@@ -5,7 +5,7 @@ using PetProject.Data;
 namespace PetProject.Controllers
 {
     [ApiController]
-    public class InitController<TEntity> : Controller where TEntity : class
+    public class InitController<TEntity> : ControllerBase where TEntity : class
     {
         protected readonly IUnitOfWork _uof;
         protected readonly PetProjectContext _context;
@@ -13,6 +13,10 @@ namespace PetProject.Controllers
         {
             _uof = uof;
             _context = context;
+        }
+        virtual protected JsonResult Json(object o)
+        {
+            return new JsonResult(o);
         }
     }
 }

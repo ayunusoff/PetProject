@@ -10,5 +10,8 @@ namespace PetProject.Interfaces.Repositories
         {
 
         }
+
+        public User? GetUserByNickname(string nickname) =>
+            _dbSet.AsNoTracking().FirstOrDefault(u => u.Nickname == nickname);
     }
 }

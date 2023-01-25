@@ -1,9 +1,9 @@
 <template>
     <v-container>
-        <!-- Создаем контейнер внутри которого и будут элементы компонента -->
+        <!-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -->
 
         <v-row class="list__cafes-title">
-            <!-- В это row выводим заголовок компонента -->
+            <!-- пїЅ пїЅпїЅпїЅ row пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -->
             <v-col>
                 <h2 class="text-center text-h3 py-3">Blogs</h2>
             </v-col>
@@ -14,17 +14,17 @@
                 <v-card>
                     <router-link :to="{ path: '/article/'+ item.id}">
                         <v-img height="500"
-                               :src="item.previewImgSrc"></v-img> <!-- С помощью v-img добавляем изображение карточки -->
+                               :src="item.previewImgSrc"></v-img> <!-- пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ v-img пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -->
                     </router-link>
                         <v-card-title>
                             <!--<router-link :to="{ path: 'article',name: 'article-detail'}" class="dropdown-item">-->
-                            <!-- Заголовок заведения -->
+                            <!-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -->
                             <h3 class="text-h6">{{ item.title }}</h3>
                        
                         </v-card-title>
                     
                     <v-card-text width="1000">
-                        <!-- Описание заведения -->
+                        <!-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -->
                         <p class="text-body-1" v-html="item.text"></p>
                     </v-card-text>
 
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    import ArticlesDataService from "../services/ArticlesDataService";
+    import RequestService from "../services/RequestService";
 
     export default {
 
@@ -48,7 +48,7 @@
         }),
         methods: {
             getArticles() {
-              ArticlesDataService.getAll()
+                RequestService.getAll()
                 .then(response => {
                     this.Articles = response.data;
                 console.log(response.data);
@@ -66,10 +66,10 @@
 </script>
 <style>
     .text-body-1, .text-h6 {
-        background: #f4eddf; /* Цвет фона */
-        padding: 10px; /* Поля вокруг текста */
-        white-space: nowrap; /* Текст не переносится */
-        overflow: hidden; /* Обрезаем всё за пределами блока */
+        background: #f4eddf; /* пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
+        padding: 10px; /* пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */
+        white-space: nowrap; /* пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+        overflow: hidden; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ */
         text-overflow: ellipsis;
     }
 </style>
