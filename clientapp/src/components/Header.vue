@@ -14,31 +14,51 @@
                 articles
             </v-btn>
         </router-link>
-        <router-link to="/article/post" class="nav-link">
+        <router-link to="/article/create" class="nav-link">
             <v-btn>
                 Add article
             </v-btn>
         </router-link>
-        <router-link to="/account/login" class="nav-link">
-            <v-btn>
-                Sign in {{ JSON.parse(user).nickname }}
-            </v-btn>
-        </router-link>
+        <div v-if="this.useStore.getAuthState">
+            <router-link to="/account" class="nav-link">
+                <v-btn color="white">
+                    {{ this.useStore.getUser.nickname }}
+                </v-btn>
+            </router-link>
+            <router-link to="/article" @click="logout" class="nav-link">
+                <v-btn>
+                    Logout
+                </v-btn>
+            </router-link>
+        </div>
+        <div v-else>
+            <router-link to="/account/signin" class="nav-link">
+                <v-btn>
+                    Sign in
+                </v-btn>
+            </router-link>
+        </div>
     </v-app-bar>
 </template>
 <script>
-    import {useAuthStore} from '../stores/user.js'
+    import {useAuthStore} from '../stores/auth.js'
     import {storeToRefs} from 'pinia'
 
     export default {
         name: 'main-header',
         setup() {
-            let userStore = useAuthStore();
-            let {user, token} = storeToRefs(userStore)
+            let useStore = useAuthStore();
+            let {user, token, loggedIn} = storeToRefs(useStore)
             return {
-                userStore, 
-                user, 
-                token
+                useStore, 
+                user,
+                token,
+                loggedIn
+            }
+        },
+        methods: {
+            async logout() {
+                await this.useStore.logout();
             }
         }
     }

@@ -18,21 +18,23 @@ const routes = [
         component: ArticleDetail
     },
     {
-        path: "/article/post",
-        name: "article-post",
+        path: "/article/create",
+        name: "article-create",
         component: ArticlePost
     },
     {
-        path: "/account/reg",
-        name: "account-reg",
+        path: "/account/signup",
+        name: "account-signup",
         component: Register
     },
     {
-        path: "/account/login",
-        name: "account-login",
+        path: "/account/signin",
+        name: "account-signin",
         component: Login
-    }
+    },
 ];
+
+
 
 const router = createRouter({
     history: createWebHistory(),

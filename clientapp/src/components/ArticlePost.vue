@@ -217,7 +217,7 @@
   <script>
       import axios from 'axios';
       export default {
-          name: 'article-post',
+          name: 'article-create',
           data() {
               return {
                   form: {

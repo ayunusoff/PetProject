@@ -1,10 +1,7 @@
 <template>
     <v-container>
-        <!-- ������� ��������� ������ �������� � ����� �������� ���������� -->
-
         <v-row class="list__cafes-title">
-            <!-- � ��� row ������� ��������� ���������� -->
-            <v-col>
+           <v-col>
                 <h2 class="text-center text-h3 py-3">Blogs</h2>
             </v-col>
         </v-row>
@@ -14,17 +11,15 @@
                 <v-card>
                     <router-link :to="{ path: '/article/'+ item.id}">
                         <v-img height="500"
-                               :src="item.previewImgSrc"></v-img> <!-- � ������� v-img ��������� ����������� �������� -->
+                               :src="item.previewImgSrc"></v-img>
                     </router-link>
                         <v-card-title>
-                            <!--<router-link :to="{ path: 'article',name: 'article-detail'}" class="dropdown-item">-->
-                            <!-- ��������� ��������� -->
+                            
                             <h3 class="text-h6">{{ item.title }}</h3>
                        
                         </v-card-title>
                     
                     <v-card-text width="1000">
-                        <!-- �������� ��������� -->
                         <p class="text-body-1" v-html="item.text"></p>
                     </v-card-text>
 

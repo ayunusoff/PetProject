@@ -3,37 +3,38 @@ import axios from 'axios';
 import RequestService from '@/services/RequestService'
 import router from "@/router";
 
-const useAuthStore = defineStore('user', {
+const useAuthStore = defineStore('auth', {
     state: () => {
         return {
             token: localStorage.getItem("token") || null,
             user: localStorage.getItem("user") || null,
-            counter: 1000,
         }
     },
     getters: {
         getToken: (state) => state.token,
         getUser: (state) => JSON.parse(state.user),
+        getAuthState: (state) => !!state.user,
     },
     actions: {
-        async login(data) {
+        login(data) {
             RequestService.login(data)
                 .then((res) => {
-                    console.log(res)
-                    console.log(data)
+                    console.log(res);
+                    console.log(data);
+                    this.loggedIn = true;
+                    console.log(this.loggedIn);
+                    console.log(res.data.jwt);
                     localStorage.setItem('user', JSON.stringify(data));
-                    localStorage.setItem('token', JSON.stringify(res.data.jwt));
+                    localStorage.setItem('token', res.data.jwt);
                 })
                 .catch((res) => {
                     console.log(res);
                 });
-            
-            
-            router.push("/article");
         },
         async logout() {
             this.user = null;
             this.token = null;
+            this.loggedIn = false;
             localStorage.removeItem('user');
             localStorage.removeItem('token')    
         },
@@ -46,7 +47,7 @@ const useAuthStore = defineStore('user', {
                     console.log(error);
                 }).finally(() => {
                 });
-            router.push("/account/login");
+            router.push("/account/signin");
         },
     },
 })

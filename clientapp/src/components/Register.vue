@@ -1,9 +1,9 @@
 ﻿<template>
-    <div class="d-flex justify-center">
-        <v-form class="reg-form" v-model="isValid" align="center">
+    <v-card class="mt-10 mx-auto my-12" width="50%" color="light-grey" align="center">
+        <v-form v-model="isValid" text-align="center">
             <v-container fluid style=" width: 100%" align="center">
                 <v-row>
-                    <v-col align="center" color="red" width="100px" height="100px">
+                    <v-col color="red" width="100px" height="100px">
 
                         <v-avatar size="200" color="teal">
                             <img contain
@@ -81,13 +81,13 @@
                 
             </v-container>
         </v-form>
-    </div>
+    </v-card>
 </template>
 <script>
     import zxcvbn from 'zxcvbn'
-    import { useAuthStore } from '@/stores/user';
+    import { useAuthStore } from '@/stores/auth';
     export default {
-        name: 'account-reg',
+        name: 'account-signup',
         setup() {
             const userStore = useAuthStore();
             return { userStore };
@@ -160,13 +160,5 @@
     }
 </script>
 <style>
-    #login {
-        width: 100px;
-    }
-    .reg-form {
-        margin-top: 1%;
-        box-shadow: 0 3px 3px #575555 inset;
-        width: 50%;
-        position: center;
-    }
+    
 </style>

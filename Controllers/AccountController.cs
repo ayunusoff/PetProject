@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using System;
 
 namespace PetProject.Controllers
 {
@@ -73,15 +75,12 @@ namespace PetProject.Controllers
         }
         private Token Token(string nickname) 
         {
-            var signKey = AuthSettings.GetSymmetricSecurityKey();
-            var signCredentials = new SigningCredentials(signKey, SecurityAlgorithms.HmacSha256);
-            
-            var claims = new Claim[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, nickname),
-            };
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthSettings.ISSUER,
+                    audience: AuthSettings.AUDIENCE,
+                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(60)),
+                    signingCredentials: new SigningCredentials(AuthSettings.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
-            var jwt = new JwtSecurityToken(claims: claims, signingCredentials: signCredentials);
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             return new Token { Jwt = encodedJwt, RefreshToken = null};

@@ -1,6 +1,6 @@
 ﻿<template>
-    <div class="d-flex justify-center">
-        <v-form class="reg-form" v-model="isValid" align="center">
+    <v-card class="mt-10 mx-auto my-12" max-width="40%" height="70%" color="light-grey">
+        <v-form class="justify-center" v-model="isValid" align="center">
             <v-container fluid style=" width: 100%" align="center">
                 <v-row>
                     <v-col align="center" color="red" width="100px" height="100px">
@@ -55,21 +55,29 @@
                     </v-col>
                 </v-row>
                 <v-row class="d-flex justify-center mb-6">
-                    <v-btn align="center" :disabled="!isValid" @click="reg">Sign up</v-btn>
+                    <router-link to="" class="nav-link"><v-btn align="center" :disabled="!isValid" @click="login">Sign in</v-btn></router-link>
                 </v-row>
-                
+                <v-row>
+                    <v-col>
+                        <router-link to="/account/signup" class="nav-link">
+                            <v-btn color="red">
+                                Create new account
+                            </v-btn>
+                        </router-link>
+                    </v-col>
+                </v-row>
             </v-container>
         </v-form>
-    </div>
+    </v-card>
 </template>
 <script> 
 import zxcvbn from 'zxcvbn'
-import { useAuthStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 export default {
-    name: 'account-login',
+    name: 'account-signin',
     setup() {
-            const userStore = useAuthStore();
-            return { userStore };
+            const useStore = useAuthStore();
+            return { useStore };
         },
         data() {
             return {
@@ -131,8 +139,10 @@ export default {
             },
         },
         methods: {
-            async reg() {
-                await this.userStore.login(this.form);
+            login() {
+                setTimeout(() => {
+                    this.useStore.login(this.form);
+                }, 500);
             }
         }
     }

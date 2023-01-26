@@ -134,8 +134,6 @@ C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\appsettings.json
 C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\clientapp\jsconfig.json
 C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\clientapp\package-lock.json
 C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\clientapp\package.json
-C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\package-lock.json
-C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\package.json
 C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\PetProject.exe
 C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\PetProject.deps.json
 C:\Users\Warrior\Desktop\PetProject\bin\Debug\net6.0\PetProject.runtimeconfig.json
