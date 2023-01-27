@@ -19,10 +19,10 @@
                 Add article
             </v-btn>
         </router-link>
-        <div v-if="this.useStore.getAuthState">
-            <router-link to="/account" class="nav-link">
+        <div v-if="user">
+            <router-link to="/account/:id" class="nav-link">
                 <v-btn color="white">
-                    {{ this.useStore.getUser.nickname }}
+                    {{ this.user.nickname }}
                 </v-btn>
             </router-link>
             <router-link to="/article" @click="logout" class="nav-link">
@@ -48,14 +48,28 @@
         name: 'main-header',
         setup() {
             let useStore = useAuthStore();
-            let {user, token, loggedIn} = storeToRefs(useStore)
+            let {userStore, token, loggedIn} = storeToRefs(useStore)
             return {
                 useStore, 
-                user,
+                userStore,
                 token,
                 loggedIn
             }
         },
+        data() {
+            return {
+                user: null
+            }
+        },
+        computed: {
+            isAutho() {
+                if (localStorage.getItem('user')) return true
+                else return false
+            }
+        },
+        mounted() {
+            this.user = JSON.parse(window.localStorage.getItem('user'));
+        },        
         methods: {
             async logout() {
                 await this.useStore.logout();

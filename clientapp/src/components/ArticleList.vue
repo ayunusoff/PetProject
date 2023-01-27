@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import RequestService from "../services/RequestService";
+    import RequestService from "../services/ArticleService";
 
     export default {
 

@@ -60,9 +60,9 @@ namespace PetProject.Controllers
             string salt = user.Password.Split('|')[1];
             string requstPass = PasswordHasher.HashPassword(loginRequest.Password, salt);
             var token = Token(user.Nickname);
-
+            UserInfoResponse userInfoResponse = new UserInfoResponse { user = user, token = token };
             if (requstPass == user.Password)
-                return Ok(token);
+                return Ok(userInfoResponse);
             return Unauthorized();
 
             

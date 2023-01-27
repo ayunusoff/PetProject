@@ -55,7 +55,7 @@
                     </v-col>
                 </v-row>
                 <v-row class="d-flex justify-center mb-6">
-                    <router-link to="" class="nav-link"><v-btn align="center" :disabled="!isValid" @click="login">Sign in</v-btn></router-link>
+                    <v-btn align="center" :disabled="!isValid" @click="login">Sign in</v-btn>
                 </v-row>
                 <v-row>
                     <v-col>
@@ -140,9 +140,7 @@ export default {
         },
         methods: {
             login() {
-                setTimeout(() => {
-                    this.useStore.login(this.form);
-                }, 500);
+                this.useStore.login(this.form);
             }
         }
     }

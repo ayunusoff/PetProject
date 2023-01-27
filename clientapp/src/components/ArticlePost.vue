@@ -214,41 +214,34 @@
     </v-form>
 </template>
   
-  <script>
-      import axios from 'axios';
-      export default {
-          name: 'article-create',
-          data() {
-              return {
-                  form: {
-                      title: '',
-                      text: '',
-                      previewImgSrc: '',
-                  },
-                  titleRules: [
-                      v => !!v || 'Name is required',
-                      v => v.length <= 50 || 'Name must be less than 50 characters',
-                  ],
-                  textRules: [
-                      v => !!v || 'Name is required',
-                      v => v.length <= 500 || 'Name must be less than 500 characters',
-                  ],
-              }
-          },
-          methods: {
-              submitForm() {
-                  axios.post('/article/post', this.form)
-                      .then((res) => {
-                          console.log(res);
-                      })
-                      .catch((error) => {
-                          console.log(error);
-                      }).finally(() => {
-                          //Perform action in always
-                      });
-              }
-          }
-      }
+<script>
+    import ArticleService from '@/services/ArticleService';
+    
+    export default {
+        name: 'article-create',
+        data() {
+            return {
+                form: {
+                    title: '',
+                    text: '',
+                    previewImgSrc: '',
+                },
+                titleRules: [
+                    v => !!v || 'Name is required',
+                    v => v.length <= 50 || 'Name must be less than 50 characters',
+                ],
+                textRules: [
+                    v => !!v || 'Name is required',
+                    v => v.length <= 500 || 'Name must be less than 500 characters',
+                ],
+            }
+        },
+        methods: {
+            submitForm() {
+                ArticleService.create(this.form);
+            }
+        }
+    }
   </script>
   
   <style>

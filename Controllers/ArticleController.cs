@@ -55,22 +55,21 @@ namespace PetProject.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Post([FromBody] ArticleRequest article) 
+        public async Task<IActionResult> Post([FromBody] ArticleRequest articleRequest) 
         {
-            if (article != null)
+            if (articleRequest != null)
             {
-                await _uof.ArticleRepository.Add(
-                new Article 
+                Article article = new Article
                 {
-                    Id = article.Id == null ? Guid.NewGuid() : (Guid)article.Id,
-                    Title = article.Title,
-                    Text = article.Text,
-                    PreviewImgSrc = article.PreviewImgSrc != null ? article.PreviewImgSrc : "./public/favicon.ico",
+                    Id = articleRequest.Id == null ? Guid.NewGuid() : (Guid)articleRequest.Id,
+                    Title = articleRequest.Title,
+                    Text = articleRequest.Text,
+                    PreviewImgSrc = articleRequest.PreviewImgSrc != null ? articleRequest.PreviewImgSrc : "./public/favicon.ico",
                     DateAdd = DateTime.UtcNow,
-                }
-                );
+                };
+                await _uof.ArticleRepository.Add(article);
                 await _uof.Complete();
-                return Ok();
+                return Ok(article.Id);
             }
             return BadRequest();
         }

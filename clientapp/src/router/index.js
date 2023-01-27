@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
-import ArticleList from '@/components/ArticleList'
 import ArticleDetail from '@/components/ArticleDetail'
+import ArticleList from '@/components/ArticleList'
+import UserProfile from '@/components/UserProfile'
 import ArticlePost from '@/components/ArticlePost'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
@@ -20,7 +21,13 @@ const routes = [
     {
         path: "/article/create",
         name: "article-create",
-        component: ArticlePost
+        component: ArticlePost,
+        beforeEnter: (to) => {
+            if (!localStorage.getItem('user') && to.name !== 'account-signin') {
+                
+                return { name: 'account-signin' }
+            }
+        }
     },
     {
         path: "/account/signup",
@@ -30,11 +37,20 @@ const routes = [
     {
         path: "/account/signin",
         name: "account-signin",
-        component: Login
+        component: Login,
+        beforeEnter: (to) => {
+            if (localStorage.getItem('user') && to.name == 'account-signin') {
+                
+                return { name: 'user-profile' }
+            }
+        }
     },
+    {
+        path: "/account/:id",
+        name: "user-profile",
+        component: UserProfile,
+    }
 ];
-
-
 
 const router = createRouter({
     history: createWebHistory(),

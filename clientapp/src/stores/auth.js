@@ -1,6 +1,5 @@
 ﻿import { defineStore } from 'pinia';
-import axios from 'axios';
-import RequestService from '@/services/RequestService'
+import AuthService from '@/services/AuthService'
 import router from "@/router";
 
 const useAuthStore = defineStore('auth', {
@@ -17,38 +16,35 @@ const useAuthStore = defineStore('auth', {
     },
     actions: {
         login(data) {
-            RequestService.login(data)
+            AuthService.login(data)
                 .then((res) => {
-                    console.log(res);
-                    console.log(data);
-                    this.loggedIn = true;
-                    console.log(this.loggedIn);
-                    console.log(res.data.jwt);
-                    localStorage.setItem('user', JSON.stringify(data));
-                    localStorage.setItem('token', res.data.jwt);
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
+                    localStorage.setItem('token', res.data.token.jwt);
                 })
                 .catch((res) => {
                     console.log(res);
                 });
+                
+                router.push('/article');
         },
         async logout() {
             this.user = null;
             this.token = null;
-            this.loggedIn = false;
             localStorage.removeItem('user');
             localStorage.removeItem('token')    
         },
         async registration(data) {
-            axios.post('/account/registration', data)
+            AuthService.registration(data)
                 .then((res) => {
                     console.log(res);
                 })
                 .catch((error) => {
                     console.log(error);
-                }).finally(() => {
                 });
+
             router.push("/account/signin");
         },
     },
 })
+
 export {useAuthStore}
