@@ -22,12 +22,6 @@ const routes = [
         path: "/article/create",
         name: "article-create",
         component: ArticlePost,
-        beforeEnter: (to) => {
-            if (!localStorage.getItem('user') && to.name !== 'account-signin') {
-                
-                return { name: 'account-signin' }
-            }
-        }
     },
     {
         path: "/account/signup",

@@ -1,5 +1,5 @@
 <template>
-    {{ this.nickname }}
+    {{ this.form.nickname }}
 </template>
 
 <script>

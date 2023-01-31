@@ -15,8 +15,8 @@ namespace PetProject.Data
             _dbSet = context.Set<TEntity>();
         }
         
-        public TEntity? Get(string id)
-            => _dbSet.AsNoTracking().FirstOrDefault(e => e.Id.ToString() == id);
+        public TEntity? GetById(string id)
+            => _dbSet.FirstOrDefault(e => e.Id.ToString() == id);
         public async Task<TEntity?> Find(Expression<Func<TEntity, bool>> predicate) 
             => await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicate);
         public async Task<IEnumerable<TEntity>> GetAll()

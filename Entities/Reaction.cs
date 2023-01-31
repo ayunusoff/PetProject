@@ -9,11 +9,8 @@ namespace PetProject.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ReactionId")]
         public Guid Id { get; set; }
-
-        public Article Article { get; set; }
-
-        public User User { get; set; }
-        
+        public Article Article { get; set; } = new();
+        public User User { get; set; } = new();
         public bool ReactionType { get; set; } 
 
     }

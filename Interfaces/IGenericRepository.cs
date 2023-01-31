@@ -4,7 +4,7 @@ namespace PetProject.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class, IEntity, new()
     {
-       TEntity? Get(string id);
+       TEntity? GetById(string id);
        Task<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
        Task<IEnumerable<TEntity>> GetAll();
        Task<IEnumerable<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate);

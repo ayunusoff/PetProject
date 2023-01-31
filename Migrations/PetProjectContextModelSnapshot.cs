@@ -29,6 +29,9 @@ namespace PetProject.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("ArticleId");
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("DateAdd")
                         .HasColumnType("timestamp with time zone");
 
@@ -43,35 +46,14 @@ namespace PetProject.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Articles");
+                    b.HasIndex("AuthorId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6b9bff90-bae0-4cc1-a2d4-0bdb1cdc0c2f"),
-                            DateAdd = new DateTime(2023, 1, 18, 5, 44, 14, 324, DateTimeKind.Utc).AddTicks(3070),
-                            PreviewImgSrc = "https://www.cctraining.uk.com/wp-content/uploads/2017/09/test.png",
-                            Text = "Test1 Test1Test1 Test1 Test1Test1Test1 Test1",
-                            Title = "Test1"
-                        },
-                        new
-                        {
-                            Id = new Guid("fd18b535-0662-4457-8726-1b0ccd19915c"),
-                            DateAdd = new DateTime(2023, 1, 18, 5, 44, 14, 324, DateTimeKind.Utc).AddTicks(3107),
-                            PreviewImgSrc = "https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ",
-                            Text = "Test2 Test2Test2 Test2 Test21Tes2t21T2e22st1 Test1",
-                            Title = "Test2"
-                        },
-                        new
-                        {
-                            Id = new Guid("20ca4e15-c233-4132-b3fc-b5f7b7dc9277"),
-                            DateAdd = new DateTime(2023, 1, 18, 5, 44, 14, 324, DateTimeKind.Utc).AddTicks(3109),
-                            PreviewImgSrc = "https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ",
-                            Text = "Test3 Test3Test3 Test3 Test321Tes32t213T2e223st1 Te3st1",
-                            Title = "Test3"
-                        });
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("PetProject.Entities.ArticleTag", b =>
@@ -200,6 +182,10 @@ namespace PetProject.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("TagId");
 
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
@@ -242,6 +228,17 @@ namespace PetProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("PetProject.Entities.Article", b =>
+                {
+                    b.HasOne("PetProject.Entities.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("PetProject.Entities.ArticleTag", b =>

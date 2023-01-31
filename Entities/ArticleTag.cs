@@ -9,7 +9,7 @@ namespace PetProject.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ArticleTagId")]
         public Guid Id { get; set; }
-        public Article Article { get; set; }
-        public Tag Tag { get; set; }
+        public Article Article { get; set; } = new();
+        public Tag Tag { get; set; } = new();
     }
 }

@@ -1,10 +1,11 @@
 ﻿<template>
-    <v-card class="mt-10 mx-auto my-12" max-width="40%" height="70%" color="light-grey">
+    <v-card class="mt-10 mx-auto my-12" max-width="80%"  color="light-grey">
         <v-form class="justify-center" v-model="isValid" align="center">
             <v-container fluid style=" width: 100%" align="center">
                 <v-row>
                     <v-col align="center" color="red" width="100px" height="100px">
                         <h1>Log In</h1>
+                        <h4 v-if="this.useStore.authError">bad pass or nickname</h4>
                     </v-col>
                 </v-row>
                 <v-row class="d-flex justify-center mb-6">
@@ -72,7 +73,7 @@
 </template>
 <script> 
 import zxcvbn from 'zxcvbn'
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth.js';
 export default {
     name: 'account-signin',
     setup() {

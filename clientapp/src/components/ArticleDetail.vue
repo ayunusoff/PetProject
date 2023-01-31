@@ -1,58 +1,95 @@
 ﻿<template>
-    <div v-html="Article.text"></div>
-    <div v-html="inner"></div>
+    <v-card class="mx-auto my-12" elevation="24" max-width="80%">
+        <v-img :src="this.Article.previewImgSrc"></v-img> <v-card-title>
+            {{ this.Article.title }}
+        </v-card-title>
+        <v-card-text>
+            {{ this.Article.text }}
+        </v-card-text>
+       
+        <v-card-actions>
+            <v-btn
+            class="ma-2"
+            text
+            icon
+            color="blue lighten-2"
+            >
+                <v-icon>mdi-thumb-up</v-icon>
+            </v-btn>
+  
+            <v-btn
+            class="ma-2"
+            text
+            icon
+            color="red lighten-2"
+            >
+                <v-icon>mdi-thumb-down</v-icon>
+            </v-btn>
+            
+            <v-btn
+            class="ma-2"
+            text
+            icon
+            color="red lighten-2"
+            >
+                {{ this.Article.viewCount }}
+            </v-btn>
+            
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
-    //import ArticlesDataService from "../services/ArticlesDataService";
-    import axios from 'axios'
-    export default {
+import articleService from "../services/ArticleService";
 
-        name: "article-detail",
+export default {
 
-        data: () => ({
-            noImage: '../public/favicon.ico',
-            Article: null,
-            inner: `<img height="50" : src="https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ"><img>`,
-        }),
-        created() {
+    name: "article-detail",
+
+    data: () => ({
+        noImage: '../public/favicon.ico',
+        Article: {
+            previewImgSrc: '',
+            title: '',
+            text: '',
+            dateAdd: '',
+            author: '',
+            viewCount: '',
+        },
+        viewCounter: 0
+    }),
+    created() {
+        
+    },
+    methods: {
+        img() {
+            if (this.Article.previewImgSrc == null)
+            this.previewImgSrc = this.noImage;
+            console.log(this.$route.id);
+            this.getArticle();
+        },
+        view() {
+            articleService.viewCounter(this.$route.params.id);
+        },
+        getArticle() {
             const id = this.$route.params.id;
-            axios
-                .get(`/article/get/${id}`)
+            console.log(id);
+            articleService.get(id)
                 .then((response) => {
-                    // JSON responses are automatically parsed.
                     this.Article = response.data;
-                    console.log(this.Article);
+                    this.viewCounter = this.Article.viewCount; 
+                    console.log(this.viewCounter);
                 })
                 .catch((e) => {
                     this.errors.push(e);
                 });
-        },
-        /*methods: {
-            getArticle() {
-                axios.get('article/get/' + this.$route.params.id).then((result) => {
-                    this.Article = result.data;
-                    console.log(this.Article);
-
-                })
-            },
-
-            
-            getArticles() {
-                ArticlesDataService.get(this.$route.id)
-                .then(response => {
-                    this.Article = response.data.previewImgSrc;
-                console.log(response.data);
-                })
-                .catch(e => {
-                  console.log(e);
-                });
-        //    },*/
-        //mounted() {
-        //    if (this.Article.previewImgSrc == null)
-        //        this.previewImgSrc = this.noImage;
-        //    console.log(this.$route.id);
-        //    this.getArticle();
-        //}
+        }
+    },
+        
+    mounted() {
+        this.getArticle();
+        this.view();
+        this.viewCounter += 1;
     }
+}
 </script>

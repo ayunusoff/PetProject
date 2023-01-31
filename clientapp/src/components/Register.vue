@@ -1,5 +1,5 @@
 ﻿<template>
-    <v-card class="mt-10 mx-auto my-12" width="50%" color="light-grey" align="center">
+    <v-card class="mt-10 mx-auto my-12" max-width="90%" color="light-grey" align="center">
         <v-form v-model="isValid" text-align="center">
             <v-container fluid style=" width: 100%" align="center">
                 <v-row>

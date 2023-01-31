@@ -9,7 +9,7 @@ namespace PetProject.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("SubscriberId")]
         public Guid Id { get; set; }
-        public User Subscribe { get; set; }
-        public User Author { get; set; }
+        public User Subscribe { get; set; } = new();
+        public User Author { get; set; } = new();
     }
 }

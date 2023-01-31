@@ -5,21 +5,29 @@ import router from "@/router";
 const useAuthStore = defineStore('auth', {
     state: () => {
         return {
-            token: localStorage.getItem("token") || null,
             user: localStorage.getItem("user") || null,
+            isLogged: false,
+            authError: false,
         }
     },
     getters: {
-        getToken: (state) => state.token,
-        getUser: (state) => JSON.parse(state.user),
-        getAuthState: (state) => !!state.user,
+        getUser:
+            (state) => {
+                state.user = JSON.parse(localStorage.getItem('user'));
+                return state.user;
+            },
+        setUser: (state) => localStorage.setItem('user', JSON.stringify(state.user))
     },
     actions: {
-        login(data) {
+        async login(data) {
             AuthService.login(data)
                 .then((res) => {
-                    localStorage.setItem('user', JSON.stringify(res.data.user));
-                    localStorage.setItem('token', res.data.token.jwt);
+                    this.isLogged = true;
+                    this.user = res.data;
+                    this.authError = false;
+                    localStorage.setItem('user', JSON.stringify(res.data));
+                    console.log(this.user);
+                    console.log(res.data.user)
                 })
                 .catch((res) => {
                     console.log(res);
@@ -29,9 +37,7 @@ const useAuthStore = defineStore('auth', {
         },
         async logout() {
             this.user = null;
-            this.token = null;
             localStorage.removeItem('user');
-            localStorage.removeItem('token')    
         },
         async registration(data) {
             AuthService.registration(data)

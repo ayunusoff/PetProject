@@ -10,6 +10,6 @@ namespace PetProject.Entities
         [Column("TagId")]
         public Guid Id { get; set; }
         
-        public string Text;
+        public string Text { get; set; } = "";
     }
 }

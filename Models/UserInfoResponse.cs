@@ -4,7 +4,7 @@ namespace PetProject.Models
 {
     public class UserInfoResponse
     {
-        public User user { get; set; }
-        public Token token { get; set; }
+        public User user { get; set; } = null!;
+        public Token token { get; set; } = null!;
     }
 }

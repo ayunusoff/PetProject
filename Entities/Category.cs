@@ -9,7 +9,7 @@ namespace PetProject.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("CategoryId")]
         public Guid Id { get; set; }
-        public Article Article { get; set; }
-        public string Text { get; set; }
+        public Article Article { get; set; } = new();
+        public string Text { get; set; } = "";
     }
 }

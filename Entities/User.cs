@@ -22,16 +22,16 @@ namespace PetProject.Entities
 
         public string? LastName { get; set; }
 
-        public string Nickname { get; set; }
+        public string Nickname { get; set; } = "";
 
-        public string EMail { get; set; }
+        public string EMail { get; set; } = "";
         
         public string? ImgSrc { get; set; }
 
         public Role UserRole { get; set; } = Role.unauthorized;
 
         [JsonIgnore]
-        public string Password { get; set; }
+        public string Password { get; set; } = "";
 
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RegisterDate { get; set; }

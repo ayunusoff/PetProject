@@ -55,17 +55,25 @@ namespace PetProject.Controllers
             var user = _uof.UserRepository.GetUserByNickname(loginRequest.Nickname);
             
             if (user == null)            
-                return NotFound();
+                return Unauthorized();
 
             string salt = user.Password.Split('|')[1];
-            string requstPass = PasswordHasher.HashPassword(loginRequest.Password, salt);
+            string requestPass = PasswordHasher.HashPassword(loginRequest.Password, salt);
             var token = Token(user.Nickname);
-            UserInfoResponse userInfoResponse = new UserInfoResponse { user = user, token = token };
-            if (requstPass == user.Password)
-                return Ok(userInfoResponse);
-            return Unauthorized();
-
             
+            if (requestPass == user.Password)
+            {
+                HttpContext.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                HttpContext.Response.Headers.Add("X-Xss-Protection", "1");
+                HttpContext.Response.Headers.Add("X-Frame-Options", "DENY");
+                HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", token.Jwt, 
+                new CookieOptions
+                {
+                        MaxAge = TimeSpan.FromMinutes(5)
+                });
+                return Ok(user.Nickname);
+            }
+            return Unauthorized();
         }
         [HttpPut]
         public IActionResult ChangePass([FromBody] LoginRequest loginRequest) 

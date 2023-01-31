@@ -33,6 +33,14 @@ class ArticleService {
     findByTitle(title) {
         return http.get(`/article/${title}`);
     }
+
+    viewCounter(id) {
+        return http.patch(`/article/patchviewcount/${id}`);
+    }
+
+    getViewCount(id){
+        return http.get(`/article/GetViewCount/${id}`)
+    }
 }
 
 export default new ArticleService();

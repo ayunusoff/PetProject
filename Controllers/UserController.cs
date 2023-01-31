@@ -15,9 +15,9 @@ namespace PetProject.Controllers
         }
         
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromHeader] string id) 
+        public IActionResult Get([FromHeader] string id) 
         {
-            var user = _uof.UserRepository.Get(id);
+            var user = _uof.UserRepository.GetById(id);
             if (user != null) 
             {
                 return Json(user);

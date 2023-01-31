@@ -9,13 +9,13 @@ namespace PetProject.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ArticleId")]
         public Guid Id { get; set; }
-        public string Title { get; set; }
-        
-        public string Text { get; set; }
-
+        public string Title { get; set; } = "";
+        public string Text { get; set; } = "";
         public string? PreviewImgSrc { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateAdd { get; set; } = DateTime.UtcNow;
+        public User Author { get; set; } = new();
+        public int ViewCount { get; set; } = default(int);
     }
 }
