@@ -1,0 +1,8 @@
+
+http.get("/article");
+http.get(`/article/${id}`);
+http.post("/article/post", data);
+http.put(`/article/put`, data);
+http.delete(`/article/${id}`);
+http.delete(`/article`);
+http.get(`/article?title=${title}`);
