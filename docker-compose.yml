@@ -1,0 +1,44 @@
+networks:
+  webapi-dev:
+    driver: bridge
+
+services:
+  petproject:
+    image: pp:ppapi
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./PetProject/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - ConnectionStrings__DB=Server=postgresdb;Port=5432;Database=PPDataBase;User Id=postgres;Password=passsupersafe;
+    depends_on:
+      - postgresdb
+    networks:
+      - webapi-dev
+
+  clientapp:
+    image: pp:ppclientapp
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./clientapp/Dockerfile
+      args:
+        VUE_APP_API_URL: http://localhost:8081
+    ports:
+      - "8081:80"
+    depends_on:
+      - petproject
+
+  postgresdb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: passsupersafe
+      POSTGRES_USER: postgres
+      POSTGRES_DB: PPDataBase
+    networks:
+      - webapi-dev
