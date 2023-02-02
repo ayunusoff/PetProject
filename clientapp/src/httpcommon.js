@@ -5,7 +5,7 @@ import { useAuthStore } from "@/stores/auth.js";
 console.log(typeof localStorage.getItem('token'));
 
  const http = axios.create({
-  baseURL: "https://localhost:8080/"
+  baseURL: "http://localhost:5000/"
 });
 
 http.defaults.headers.post['Content-Type'] = "application/json";

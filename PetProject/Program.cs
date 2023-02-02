@@ -32,7 +32,17 @@ builder.Services.AddDbContext<PetProjectContext>(options => options.UseNpgsql(co
 
 builder.Services.AddControllers();
 
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("CorsPolicy",
+                        builder =>
+                        {
+                            builder.WithOrigins("http://localhost:8080")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials();
+                        });
+                });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<DbContext, PetProjectContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -40,7 +50,31 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 
 var app = builder.Build();
 
-app.UseCors(builder => builder.WithOrigins("http://localhost:8081").AllowCredentials());
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    var db = serviceScope.ServiceProvider.GetRequiredService<PetProjectContext>().Database;
+
+    logger.LogInformation("Migrating database...");
+
+    while (!db.CanConnect())
+    {
+        logger.LogInformation("Database not ready yet; waiting...");
+        Thread.Sleep(1000);
+    }
+
+    try
+    {
+        serviceScope.ServiceProvider.GetRequiredService<PetProjectContext>().Database.Migrate();
+        logger.LogInformation("Database migrated successfully.");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
+
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 app.UseRouting();
